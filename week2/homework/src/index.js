@@ -1,6 +1,6 @@
 "use strict";
 
-// TODO: Write the homework code in this file
+// todoList: Write the homework code in this file
 const fs = require("fs");
 
 switch (process.argv[2]) {
@@ -14,12 +14,12 @@ switch (process.argv[2]) {
   case "add":
     fs.readFile("./to-dos.txt", "UTF-8", (err, data) => {
       if (err) throw err;
-      let todo = JSON.parse(data);
+      let todoList = JSON.parse(data);
       let item = { item: process.argv[3] };
-      todo.push(item);
+      todoList.push(item);
       fs.writeFileSync(
         "./to-dos.txt",
-        JSON.stringify(todo)
+        JSON.stringify(todoList)
       );
       console.log(`item ${process.argv[3]} is added`);
     });
@@ -28,17 +28,17 @@ switch (process.argv[2]) {
   case "remove":
     fs.readFile("./to-dos.txt", "UTF-8", (err, data) => {
       if (err) throw err;
-      let todo = JSON.parse(data);
-      if (todo.length == 0) {
+      let todoList = JSON.parse(data);
+      if (todoList.length == 0) {
         console.log(
           "The list is empty ---> nothing to remove"
         );
       } else {
-        todo.splice(process.argv[3] - 1, 1);
+        todoList.splice(process.argv[3] - 1, 1);
         console.log(`item ${process.argv[3]} is removed`);
         fs.writeFileSync(
           "./to-dos.txt",
-          JSON.stringify(todo)
+          JSON.stringify(todoList)
         );
       }
     });
